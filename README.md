@@ -61,5 +61,9 @@ git clone git@github.com:vinhnglx/dotfiles.git
 :PluginInstall
 ```
 
+**Screenshot**
+
+![Image](https://cloud.githubusercontent.com/assets/1997137/19061842/a01a84fa-8a26-11e6-8580-89eb6a86ddf6.png)
+
 **Done! Voila**
 
