@@ -2,7 +2,7 @@
 
 homedir=~
 pwd=$(pwd)
-files=(.gemrc .gitconfig .tmux.conf .vimrc .zshrc .zpreztorc)
+files=(.gemrc .gitconfig .tmux.conf .vimrc .zpreztorc)
 
 link_dotfile()
 {
