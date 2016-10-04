@@ -43,7 +43,9 @@ set visualbell
 set ttyfast
 set norelativenumber
 set nohlsearch
+
 set colorcolumn=81
+highlight ColorColumn ctermbg=2
 
 set nobackup
 set noswapfile
