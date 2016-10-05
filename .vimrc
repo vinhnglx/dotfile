@@ -16,6 +16,8 @@ Plugin 'ervandew/supertab'
 Plugin 'Raimondi/delimitMate' " autocomplete bracket
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'slim-template/vim-slim.git'
+Plugin 'rking/ag.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -46,6 +48,7 @@ set nohlsearch
 
 set colorcolumn=81
 highlight ColorColumn ctermbg=2
+
 
 set nobackup
 set noswapfile
@@ -115,9 +118,11 @@ map <leader>t :CtrlP<cr>
 " Airline
 let g:airline_theme='bubblegum'
 
-" Map buffer
-nnoremap <C-l> :bnext<CR>
-nnoremap <C-h> :bprevious<CR>
+" Pane
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 " Tab
 nnoremap th  :tabfirst<CR>
