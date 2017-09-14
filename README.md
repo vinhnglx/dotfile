@@ -63,7 +63,7 @@ git clone git@github.com:vinhnglx/dotfiles.git
 
 **Screenshot**
 
-![Image](https://cloud.githubusercontent.com/assets/1997137/19061842/a01a84fa-8a26-11e6-8580-89eb6a86ddf6.png)
+![Image](https://user-images.githubusercontent.com/1997137/30432902-a2260164-9995-11e7-948f-54f583eee94a.png)
 
 **Done! Voila**
 
