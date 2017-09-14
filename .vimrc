@@ -18,6 +18,14 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'slim-template/vim-slim.git'
 Plugin 'rking/ag.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'neovimhaskell/haskell-vim'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'pseewald/vim-anyfold'
+Plugin 'ekalinin/Dockerfile.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -30,6 +38,7 @@ set term=xterm
 set t_Co=256
 
 set hlsearch
+set incsearch
 set background = "dark"
 set modelines=0
 syntax enable
@@ -44,10 +53,9 @@ set wildmode=list:longest,full
 set visualbell
 set ttyfast
 set norelativenumber
-set nohlsearch
 
-set colorcolumn=81
-highlight ColorColumn ctermbg=2
+" set colorcolumn=81
+" highlight ColorColumn ctermbg=2
 
 
 set nobackup
@@ -63,6 +71,7 @@ set nowrap
 set laststatus=2
 
 set tabstop=2
+set softtabstop=2
 set shiftwidth=2
 set expandtab
 
@@ -95,14 +104,20 @@ map <leader>vi :VimuxInspectRunner<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 
 " fold
-set foldmethod=manual
-set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
+" set foldmethod=manual
+" set foldnestmax=3       "deepest fold is 3 levels
+" set nofoldenable        "dont fold by default
+" set fen fdm=expr fde=getline(v:lnum)=~#'<[^>]*>'?'a1':getline(v:lnum)=~#'</[^>]*>'?'s1':'='
+" setlocal foldmethod=indent
+filetype plugin indent on
+let anyfold_activate=1
+set foldlevel=0
 
 " ctags
 nnoremap <leader>ct :!ctags -R --languages=ruby --exclude=.git --exclude=log<CR><CR>
 
-nnoremap <leader>. :CtrlPTag<cr>
+" CtrlP
+nnoremap <leader>f :CtrlPTag<cr>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
@@ -111,7 +126,7 @@ hi VertSplit ctermbg=5 ctermfg=256
 set fillchars+=vert:\|
 
 " CtrlP
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/coverage/*,tags,*/maildir/*,*/vendor/*,*/public/assets/*,*/bower_components/*,*/dist/*,*/node_modules/*,*/downloads/*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/log/*,*/coverage/*,tags,*/maildir/*,*/vendor/*,*/public/assets/*,*/bower_components/*,*/dist/*,*/node_modules/*,*/downloads/*,*/_build/*,*/deps/*
 map <leader>p :CtrlPClearAllCaches<CR>
 map <leader>t :CtrlP<cr>
 
@@ -138,3 +153,29 @@ nnoremap tl :tabprev<CR>
 nnoremap tn :tabnew<CR>
 
 nnoremap <leader>ch :%s/\(\w\+\)\s*=>\s*/\1: /g<cr>
+
+" C++
+autocmd filetype cpp nnoremap cp :!g++ % -ggdb -o %:r <CR>
+autocmd filetype cpp nnoremap cr :!g++ % -ggdb -o %:r && ./%:r <CR>
+
+" JSX in JS
+let g:jsx_ext_required = 0
+
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+" Haskell
+syntax on
+
+filetype plugin indent on
+
+augroup vimrc-auto-mkdir
+  autocmd!
+  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'), v:cmdbang)
+  function! s:auto_mkdir(dir, force)
+    if !isdirectory(a:dir)
+          \   && (a:force
+          \       || input("'" . a:dir . "' does not exist. Create? [y/N]") =~? '^y\%[es]$')
+      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+  endfunction
+augroup END

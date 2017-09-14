@@ -24,3 +24,7 @@
   excludesfile = ~/.gitignore
 [push]
   default = simple
+[user]
+  email = vincent@siliconjungles.com
+	name = Vincent
+
