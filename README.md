@@ -2,31 +2,66 @@
 
 The configuration for my macbook.
 
-**Install Prezto**
+**Install Oh-My-ZSH**
+
+- Install xcode-select
+
+```
+sudo rm -rf /Library/Developer/CommandLineTools # remove the current
+xcode-select --install # install new one
+```
+
+- Install Homebrew (homepage)
 
 - Install ZSH
 
-- Cloen Prezto
-
 ```
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+brew install zsh
 ```
 
-- Add the line below to .zshrc config
+- Install Oh-My-ZSH
 
 ```
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-  # If you already have the Zsh framework, so you need to change a little bit
-  # ln -f "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
-- Set your zsh as default shell
+- Install Powerfont
 
 ```
-chsh -s /bin/zsh
+git clone https://github.com/powerline/fonts.git
+
+cd fonts
+
+./install.sh
+```
+
+- Open .zshrc and add
+
+```
+ZSH_THEME="agnoster"
+
+ENABLE_CORRECTION="true"
+
+export EDITOR='vim'
+
+alias cl="clear"
+alias glog="git log --graph --all -decorate"
+alias tx="tmuxinator"
+
+bindkey -v
+
+# start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+  autoload -U up-line-or-beginning-search
+  zle -N up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+  autoload -U down-line-or-beginning-search
+  zle -N down-line-or-beginning-search
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
 ```
 
 **Install Vundle**
