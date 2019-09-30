@@ -109,9 +109,9 @@ map <Leader>vq :VimuxCloseRunner<CR>
 " set nofoldenable        "dont fold by default
 " set fen fdm=expr fde=getline(v:lnum)=~#'<[^>]*>'?'a1':getline(v:lnum)=~#'</[^>]*>'?'s1':'='
 " setlocal foldmethod=indent
-filetype plugin indent on
-let anyfold_activate=1
-set foldlevel=0
+" filetype plugin indent on
+" let anyfold_activate=1
+" set foldlevel=0
 
 " ctags
 nnoremap <leader>ct :!ctags -R --languages=ruby --exclude=.git --exclude=log<CR><CR>
